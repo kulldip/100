@@ -1,0 +1,132 @@
+public abstract class Car {
+    public abstract void allocateAccessories();
+    public abstract void assembleEngine();
+    public abstract void paintCar();
+    public abstract void addWheels();
+    public abstract void addLights();
+}
+
+public class CarFactory {
+    public Car createCar(String type) {
+        if (type.equalsIgnoreCase("Hatchback")) {
+            return new Hatchback();
+        } else if (type.equalsIgnoreCase("Sedan")) {
+            return new Sedan();
+        } else if (type.equalsIgnoreCase("SUV")) {
+            return new SUV();
+        }
+        return null;
+    }
+}
+
+public class Hatchback extends Car {
+    @Override
+    public void allocateAccessories() {
+        System.out.println("Allocating hatchback accessories.");
+    }
+
+    @Override
+    public void assembleEngine() {
+        System.out.println("Assembling hatchback engine.");
+    }
+
+    @Override
+    public void paintCar() {
+        System.out.println("Painting hatchback.");
+    }
+
+    @Override
+    public void addWheels() {
+        System.out.println("Adding hatchback wheels.");
+    }
+
+    @Override
+    public void addLights() {
+        System.out.println("Adding hatchback lights.");
+    }
+}
+
+public class Sedan extends Car {
+    @Override
+    public void allocateAccessories() {
+        System.out.println("Allocating sedan accessories.");
+    }
+
+    @Override
+    public void assembleEngine() {
+        System.out.println("Assembling sedan engine.");
+    }
+
+    @Override
+    public void paintCar() {
+        System.out.println("Painting sedan.");
+    }
+
+    @Override
+    public void addWheels() {
+        System.out.println("Adding sedan wheels.");
+    }
+
+    @Override
+    public void addLights() {
+        System.out.println("Adding sedan lights.");
+    }
+}
+
+public class SUV extends Car {
+    @Override
+    public void allocateAccessories() {
+        System.out.println("Allocating SUV accessories.");
+    }
+
+    @Override
+    public void assembleEngine() {
+        System.out.println("Assembling SUV engine.");
+    }
+
+    @Override
+    public void paintCar() {
+        System.out.println("Painting SUV.");
+    }
+
+    @Override
+    public void addWheels() {
+        System.out.println("Adding SUV wheels.");
+    }
+
+    @Override
+    public void addLights() {
+        System.out.println("Adding SUV lights.");
+    }
+}
+
+import java.util.Scanner;
+
+public class TestFactoryPattern {
+    public static void main(String[] args) {
+        CarFactory carFactory = new CarFactory();
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter vehicle you want to produce:\n1. Hatchback\n2. SUV\n3. Sedan\n");
+        String cartype = sc.nextLine();
+
+        System.out.print("How many cars do you want to produce? ");
+        int no = sc.nextInt();
+        sc.close();
+
+        for (int i = 0; i < no; i++) {
+            System.out.println(cartype + " " + (i + 1));
+            Car car = carFactory.createCar(cartype);
+            if (car != null) {
+                car.allocateAccessories();
+                car.assembleEngine();
+                car.paintCar();
+                car.addWheels();
+                car.addLights();
+            } else {
+                System.out.println("Invalid car type entered.");
+                break;
+            }
+        }
+    }
+}
